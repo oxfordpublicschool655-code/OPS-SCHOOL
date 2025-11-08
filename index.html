@@ -4,25 +4,143 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Welcome to Oxford Public School, Shivajinagar</title>
+  
+  <!-- FONT & ICON LINKS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- ANIMATION ON SCROLL (AOS) STYLESHEET -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
   <style>
     /* Global Styles */
-    body { font-family: Arial, sans-serif; background-color: #eaf4fb; margin: 0; padding: 0; }
-    header.main-header { text-align: center; padding: 30px; background: #01497c; color: white; }
-    .intro { padding: 20px; text-align: center; }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px; /* Offset for sticky nav */
+    }
+    body { 
+      font-family: 'Poppins', sans-serif; /* NEW FONT */
+      background-color: #f4f7f6; 
+      margin: 0; 
+      padding: 0; 
+    }
+    
+    /* ======================================= */
+    /* == NEW STICKY NAVIGATION BAR STYLES  == */
+    /* ======================================= */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 20px;
+    }
+    nav .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      height: 70px;
+    }
+    nav .nav-logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #01497c;
+    }
+    nav .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      padding: 5px 0;
+      position: relative;
+    }
+    nav a:hover {
+      color: #01497c;
+      transition: 0.3s;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #01497c;
+      transition: width 0.3s ease;
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Header & Banner */
+    .hero-header {
+      background: linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('https://picsum.photos/seed/school-banner/1400/500') center/cover no-repeat;
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    .hero-header h1 { font-size: 3rem; font-weight: 700; margin: 0; }
+    .hero-header p { font-size: 1.3rem; margin: 10px 0 0; opacity: 0.9; }
+    
+    /* Other Page Sections */
+    .intro { padding: 40px 20px; text-align: center; }
     .photos { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; padding: 20px; }
     .photos img { height: 180px; border-radius: 8px; object-fit: cover; }
-    .btn { display: inline-block; margin-top: 10px; padding: 10px 20px; background-color: #01497c; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; }
-    .whatsapp-btn { background-color: #25D366; border: none; }
-    .whatsapp-btn:hover { background-color: #1DAA53; }
-    .whatsapp-btn i { margin-right: 8px; }
-
+    
     /* Main Content Layout */
     main { display: flex; flex-wrap: wrap; justify-content: center; padding: 20px; gap: 20px; }
-    .column { width: 100%; max-width: 800px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); display: flex; flex-direction: column; }
+    .column { width: 100%; max-width: 800px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
     @media (min-width: 992px) { .column { width: 48%; } }
-    .column h3 { border-bottom: 2px solid #ccc; padding-bottom: 10px; margin-top: 0; margin-bottom: 15px; }
+    .column h3 { border-bottom: 2px solid #eee; padding-bottom: 10px; margin-top: 0; margin-bottom: 15px; font-weight: 600; }
     .scrollable-content { max-height: 700px; overflow-y: auto; padding: 15px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #f9f9f9; flex-grow: 1; }
+
+    /* ========================================= */
+    /* == NEW RESTYLED STAFF DIRECTORY STYLES == */
+    /* ========================================= */
+    #staff-directory { display: flex; flex-direction: column; height: 100%; }
+    #staff-directory * { box-sizing: border-box; }
+    #staff-directory .controls { padding: 0; margin-bottom: 20px; display: flex; gap: 15px; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+    #staff-directory .search-box { flex: 1; min-width: 200px; position: relative; }
+    #staff-directory .search-box input { width: 100%; padding: 10px 15px; border: 2px solid #e0e0e0; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 0.9rem; }
+    #staff-directory .filter-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+    #staff-directory .filter-btn { padding: 8px 15px; border: 2px solid #e0e0e0; background: white; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.9rem; color: #333; text-decoration: none; transition: all 0.3s; }
+    #staff-directory .filter-btn:hover { border-color: #01497c; color: #01497c; }
+    #staff-directory .filter-btn.active { background: #01497c; color: white; border-color: #01497c; }
+    #staff-directory .staff-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 20px; }
+    
+    /* New Teacher Card Style */
+    .staff-card {
+      background: white;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .staff-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    .staff-photo { 
+      width: 100%; 
+      height: 160px; 
+      object-fit: cover; 
+      background-color: #f0f0f0;
+    }
+    .staff-info { padding: 15px; }
+    .staff-name { font-size: 1rem; font-weight: 600; margin: 0 0 5px 0; }
+    .staff-position { font-size: 0.85rem; color: #666; margin: 0; }
+    #staff-directory .no-results { text-align: center; padding: 40px 20px; color: #7f8c8d; }
 
     /* Collapsible Event Gallery Styles */
     .accordion-header { background-color: #f1f1f1; color: #444; cursor: pointer; padding: 18px; width: 100%; text-align: left; border: none; outline: none; transition: background-color 0.4s ease; font-size: 1rem; font-weight: bold; position: relative; border-radius: 5px; margin-top: 10px; }
@@ -34,75 +152,65 @@
     .event-photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; padding: 15px 0; }
     .event-photo-grid img { width: 100%; height: 100px; object-fit: cover; border-radius: 5px; }
 
-    /* Staff Directory Styles */
-    #staff-directory { display: flex; flex-direction: column; height: 100%; }
-    #staff-directory * { box-sizing: border-box; }
-    #staff-directory .controls { background: white; border-radius: 15px; padding: 20px; margin-bottom: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); display: flex; gap: 15px; flex-wrap: wrap; align-items: center; justify-content: space-between; }
-    #staff-directory .search-box { flex: 1; min-width: 200px; position: relative; }
-    #staff-directory .staff-photo { width: 100%; height: 160px; object-fit: cover; background: #f0f0f0; }
-    #staff-directory .search-box input { width: 100%; padding: 10px 40px 10px 15px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 0.9rem; }
-    #staff-directory .search-box i { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #95a5a6; }
-    #staff-directory .filter-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
-    #staff-directory .filter-btn { padding: 8px 15px; border: 2px solid #e0e0e0; background: white; border-radius: 8px; cursor: pointer; font-weight: 500; font-size: 0.9rem; color: #333; text-decoration: none; }
-    #staff-directory .filter-btn:hover { border-color: #667eea; color: #667eea; }
-    #staff-directory .filter-btn.active { background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-color: transparent; }
-    #staff-directory .staff-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-    @media (min-width: 576px) { #staff-directory .staff-grid { grid-template-columns: repeat(2, 1fr); } }
-    #staff-directory .staff-card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: all 0.3s; position: relative; font-family: 'Segoe UI', sans-serif; animation: fadeIn 0.5s ease-out; }
-    #staff-directory .staff-info { padding: 15px; }
-    #staff-directory .staff-name { font-size: 1.15rem; font-weight: bold; }
-    #staff-directory .staff-position { color: #667eea; font-weight: 500; margin-bottom: 8px; display: flex; align-items: center; gap: 5px; font-size: 0.9rem; }
-    #staff-directory .staff-department { background: #f8f9fa; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px; }
-    #staff-directory .staff-details { font-size: 0.85rem; color: #555; }
-    #staff-directory .staff-detail-item { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; word-break: break-all; }
-    #staff-directory .staff-badge { position: absolute; top: 8px; right: 8px; padding: 4px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; }
-    #staff-directory .badge-teacher { background: #e8f5e9; color: #2e7d32; }
-    #staff-directory .badge-non-teaching { background: #fff3e0; color: #ef6c00; }
-    #staff-directory .no-results { text-align: center; padding: 40px 20px; color: #7f8c8d; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-
     /* Final Notification Area */
-    .notification-section { padding: 30px; background-color: #fff3cd; margin: 20px; border-radius: 8px; }
-    .notification-section h3 { text-align: center; margin-top: 0; }
-    .notification-container { display: flex; flex-wrap: wrap; gap: 40px; text-align: left; justify-content: center; }
+    .notification-section { padding: 50px 20px; background-color: #e3edf3; }
+    .notification-section h3 { text-align: center; margin-top: 0; font-size: 2rem; color: #333; }
+    .notification-container { display: flex; flex-wrap: wrap; gap: 40px; text-align: left; justify-content: center; max-width: 1100px; margin: 0 auto; }
     .notification-col-main { flex: 2; min-width: 300px; }
-    .notification-col-links { flex: 1; min-width: 250px; background: #fff9e6; padding: 20px; border-radius: 8px; }
-    .notification-col-main h4, .notification-col-links h4 { margin-top: 0; border-bottom: 2px solid #ffdb58; padding-bottom: 8px; }
+    .notification-col-links { flex: 1; min-width: 250px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+    .notification-col-main h4, .notification-col-links h4 { margin-top: 0; border-bottom: 2px solid #ddd; padding-bottom: 8px; font-weight: 600; }
     .notification-col-links ul { list-style: none; padding: 0; margin: 0; }
     .notification-col-links li { margin-bottom: 15px; }
-    .notification-col-links a { text-decoration: none; color: #01497c; font-weight: bold; display: flex; align-items: center; }
-    .notification-col-links a::before { content: '\f0c1'; font-family: 'Font Awesome 6 Free'; font-weight: 900; margin-right: 10px; }
+    .notification-col-links a { text-decoration: none; color: #01497c; font-weight: 600; display: flex; align-items: center; transition: color 0.3s; }
+    .notification-col-links a:hover { color: #0056b3; }
+    .notification-col-links a::before { content: '\f0c1'; font-family: 'Font Awesome 6 Free'; font-weight: 900; margin-right: 10px; color: #01497c; }
 
   </style>
 </head>
 <body>
 
-  <header class="main-header">
-    <h1>Oxford Public School, Shivajinagar</h1>
-    <p>Reg. No: 22112862023113143124 | UDISE: 10194100071</p>
+  <!-- NEW STICKY NAVIGATION BAR -->
+  <nav>
+    <div class="nav-container">
+      <div class="nav-logo">Oxford Public School</div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#staff">Our Staff</a>
+        <a href="#events">Events</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- NEW HERO HEADER -->
+  <header class="hero-header" id="home">
+    <h1>Oxford Public School</h1>
+    <p>Empowering Minds • Inspiring Futures</p>
   </header>
-  <section class="intro">
+  
+  <section class="intro" data-aos="fade-up">
     <h2>Welcome to Our School</h2>
-    <p>Providing world-class education and holistic development in a nurturing environment.</p>
+    <p>Reg. No: 22112862023113143124 | UDISE: 10194100071</p>
   </section>
-  <section class="photos">
-    <div> <img src="https://picsum.photos/seed/oxford-campus/400/300" alt="School Photo"> <p style="text-align: center;"><strong>Oxford Public School Campus</strong></p> </div>
-    <div> <img src="https://picsum.photos/seed/director-raj-narayan/400/300" alt="Director: Mr. Raj Narayan"> <p style="text-align: center;"><strong>Director: Mr. Raj Narayan</strong></p> </div>
-    <div> <img src="https://picsum.photos/seed/principal-nitish-nayan/400/300" alt="Principal: Mr. Nitish Kumar Nayan"> <p style="text-align: center;"><strong>Principal: Mr. Nitish Kumar Nayan</strong></p> </div>
+  
+  <section class="photos" data-aos="fade-up">
+    <div data-aos="fade-up" data-aos-delay="100"> <img src="https://picsum.photos/seed/oxford-campus/400/300" alt="School Photo"> <p style="text-align: center;"><strong>Oxford Public School Campus</strong></p> </div>
+    <div data-aos="fade-up" data-aos-delay="200"> <img src="https://picsum.photos/seed/director-raj-narayan/400/300" alt="Director: Mr. Raj Narayan"> <p style="text-align: center;"><strong>Director: Mr. Raj Narayan</strong></p> </div>
+    <div data-aos="fade-up" data-aos-delay="300"> <img src="https://picsum.photos/seed/principal-nitish-nayan/400/300" alt="Principal: Mr. Nitish Kumar Nayan"> <p style="text-align: center;"><strong>Principal: Mr. Nitish Kumar Nayan</strong></p> </div>
   </section>
   
   <main>
-    <div class="column">
+    <div class="column" id="staff" data-aos="fade-up">
       <h3>Our Teachers & Staff</h3>
       <section id="staff-directory">
-        <div class="controls"> <div class="search-box"> <input type="text" id="searchInput" placeholder="Search staff..."> <i class="fas fa-search"></i> </div> <div class="filter-buttons"> <button class="filter-btn active" data-filter="all">All</button> <button class="filter-btn" data-filter="teacher">Teachers</button> <button class="filter-btn" data-filter="non-teaching">Support</button> </div> </div>
+        <div class="controls"> <div class="search-box"> <input type="text" id="searchInput" placeholder="Search staff..."> </div> <div class="filter-buttons"> <button class="filter-btn active" data-filter="all">All</button> <button class="filter-btn" data-filter="teacher">Teachers</button> <button class="filter-btn" data-filter="non-teaching">Support</button> </div> </div>
         <div class="scrollable-content">
           <div class="staff-grid" id="staffGrid"></div>
           <div class="no-results" id="noResults" style="display: none;"> <i class="fas fa-search"></i> <h3>No staff members found</h3> <p>Try adjusting your search</p> </div>
         </div>
       </section>
     </div>
-    <div class="column">
+    <div class="column" id="events" data-aos="fade-up">
       <h3>Event Highlights</h3>
       <div class="scrollable-content">
         <button class="accordion-header">Annual Sports Day</button>
@@ -115,14 +223,14 @@
     </div>
   </main>
 
-  <section class="notification-section">
+  <section class="notification-section" id="contact" data-aos="fade-up">
     <h3>Information & Quick Links</h3>
     <div class="notification-container">
       <div class="notification-col-main">
         <h4>Latest Circular</h4>
         <p>Click below to view the latest school notice:</p>
         <a href="files/newsletter.pdf" target="_blank" class="btn">Read PDF Notice</a>
-        <hr style="margin: 25px 0; border-top: 1px solid #ffdb58; border-bottom: none;">
+        <hr style="margin: 25px 0; border-top: 1px solid #ddd; border-bottom: none;">
         <h4>Contact Us</h4>
         <p>For admissions and queries, contact us directly:</p>
         <a href="https://wa.me/916203458239?text=Hello!%20I'm%20contacting%20you%20from%20the%20Oxford%20Public%20School%20website%20and%20have%20a%20question." class="btn whatsapp-btn" target="_blank">
@@ -133,7 +241,7 @@
         <h4>Other School Links</h4>
         <ul>
           <li><a href="#" target="_blank">School Facebook Page</a></li>
-          <li><a href="https://www.youtube.com/@nitishsiroxfordschool" target="_blank">Our YouTube Channel</a></li>
+          <li><a href="#" target="_blank">Our YouTube Channel</a></li>
           <li><a href="#" target="_blank">Online Admission Portal</a></li>
           <li><a href="#" target="_blank">Parent Login Area</a></li>
         </ul>
@@ -141,13 +249,35 @@
     </div>
   </section>
 
+  <!-- ANIMATION ON SCROLL (AOS) SCRIPT -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
   <script>
     document.addEventListener("DOMContentLoaded", function() {
+      
+      // Initialize AOS Animations
+      AOS.init({
+        duration: 800,
+        once: true
+      });
+
+      // Staff Directory Logic
       const staffData = [ { name: "RAHUL KUMAR", position: "STAFF", department: "OFFICE", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "rahul-kumar" }, { name: "SANTOSH KUMAR", position: "STAFF", department: "OFFICE", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "santosh-kumar" }, { name: "ARATI KUMARI", position: "STAFF", department: "OFFICE", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "arati-kumari" }, { name: "MADHUKAR KUMAR", position: "STAFF", department: "OFFICE", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "madhukar-kumar" }, { name: "DEEPAK KUMAR", position: "TEACHER", department: "3 TO 8 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "deepak-kumar" }, { name: "SONI KUMARI", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "soni-kumari" }, { name: "RANJEET KUMAR SINGH", position: "TEACHER", department: "3 TO 8 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "ranjeet-kumar-singh" }, { name: "MAHADEV PANDIT", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "mahadev-pandit" }, { name: "NILU KUMARI", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "nilu-kumari" }, { name: "CHANDANI KUMARI", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "chandani-kumari" }, { name: "PAMMY KUMARI", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "pammy-kumari" }, { name: "HEMKANT KUMAR SINGH", position: "TEACHER", department: "3 TO 8 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "hemkant-kumar-singh" }, { name: "JAY SHANKAR KUMAR", position: "TEACHER", department: "3 TO 8 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "jay-shankar-kumar" }, { name: "DINESH PRASHAD SINGH", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "dinesh-prashad-singh" }, { name: "SHIWANI KUMARI", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "shiwani-kumari" }, { name: "TANU KUAMRI", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "tanu-kuamri" }, { name: "SANGITA KUMARI", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "sangita-kumari" }, { name: "DAYASHANKAR KUMAR", position: "TEACHER", department: "3 TO 8 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "dayashankar-kumar" }, { name: "RAVEENA KUMARI", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "raveena-kumari" }, { name: "LAXMAN KUMAR", position: "TEACHER", department: "3 TO 8 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "laxman-kumar" }, { name: "BABY KUMARI", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "baby-kumari" }, { name: "GYAN BHARTI", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "gyan-bharti" }, { name: "KOMAL KUMARI", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "komal-kumari" }, { name: "KARISHMA KUMARI", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "karishma-kumari" }, { name: "RAJNISH KUMAR", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "rajnish-kumar" }, { name: "NITISH KUMAR 2ND", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "nitish-kumar-2nd" }, { name: "MAMAN CHOUDHARY", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "maman-choudhary" }, { name: "KAJAL MAM", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "kajal-mam" }, { name: "SANGAM MAM", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "sangam-mam" }, { name: "NITISH SIRE 3RD", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "nitish-sire-3rd" }, { name: "POOJA MAM", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "pooja-mam" }, { name: "REENA MAM", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "reena-mam" }, { name: "NITU MAM", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "nitu-mam" }, { name: "SANJU MAM", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "sanju-mam" }, { name: "MUKESH SIR", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "mukesh-sir" }, { name: "JYOTI MAM", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "jyoti-mam" }, { name: "KANHAIYA SIR", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "kanhaiya-sir" }, { name: "SANJULA KUMARI", position: "SWEEPER", department: "Janitorial", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "sanjula-kumari" }, { name: "HEENA JEE", position: "SWEEPER", department: "Janitorial", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "heena-jee" }, { name: "MALA JEE", position: "SWEEPER", department: "Janitorial", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "mala-jee" }, { name: "GANESH JEE (BUS) (BR33PA8676)", position: "DRIVER", department: "Transportation Department", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "ganesh-jee-bus" }, { name: "MUKESH KUMAR(GOLU JEE) (BOLERO) (BR09M3168)", position: "DRIVER", department: "Transportation Department", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "mukesh-kumar-golu-jee" }, { name: "CHANDRAJEET SINGH (MAGIC) (BR07PB5604)", position: "DRIVER", department: "Transportation Department", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "chandrajeet-singh-magic" }, { name: "AMRESH KUMAR (SAVARI)", position: "DRIVER", department: "Transportation Department", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "amresh-kumar-savari" }, { name: "SAROJ KUMAR (SAVARI) (BR07P3034)", position: "DRIVER", department: "Transportation Department", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "saroj-kumar-savari" }, { name: "KAILASH KUMAR (BOLERO) (BR9E5888)", position: "DRIVER", department: "Transportation Department", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "kailash-kumar-bolero" }, { name: "RAM NARESH MANDAL BHAGAT JI (BOLERO) (BR06PB4465)", position: "DRIVER", department: "Transportation Department", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "ram-naresh-mandal" }, { name: "SANJAY RAM (MAGIC) (BR07PB1559)", position: "DRIVER", department: "Transportation Department", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "sanjay-ram-magic" }, { name: "RAM SHUKIT MANDAL (CONDUCTOR)", position: "DRIVER", department: "Transportation Department", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "ram-shukit-mandal" }, { name: "LALA JEE", position: "DRIVER", department: "Transportation Department", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "lala-jee" }, { name: "NITENDRA JEE (ELECTRIC MISTRI)", position: "ELECTRICIAN", department: "Transportation Department", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "nitendra-jee" } ];
       let currentFilter='all',searchTerm='';
-      function renderStaff(){const t=document.getElementById("staffGrid"),e=document.getElementById("noResults");let n=staffData.filter(t=>("all"===currentFilter||t.type===currentFilter)&&(""===searchTerm||t.name.toLowerCase().includes(searchTerm.toLowerCase())||t.position.toLowerCase().includes(searchTerm.toLowerCase())||t.department.toLowerCase().includes(searchTerm.toLowerCase())));0===n.length?(t.style.display="none",e.style.display="block"):(t.style.display="grid",e.style.display="none",t.innerHTML=n.map((t,e)=>`\n            <div class="staff-card" style="animation-delay: ${.05*e}s">\n                <span class="staff-badge badge-${t.type}">${"teacher"===t.type?"Teacher":"Support"}</span>\n                <img src="${t.image.startsWith('http') ? t.image : `https://picsum.photos/seed/${t.image}/300/200.jpg`}" alt="${t.name}" class="staff-photo">\n                <div class="staff-info">\n                    <div class="staff-name">${t.name}</div>\n                    <div class="staff-position"><i class="fas fa-briefcase"></i> ${t.position}</div>\n                    <div class="staff-department">${t.department}</div>\n                    <div class="staff-details">\n                        <div class="staff-detail-item"><i class="fas fa-envelope"></i> <span>${t.email || 'N/A'}</span></div>\n                        <div class="staff-detail-item"><i class="fas fa-phone"></i> <span>${t.phone || 'N/A'}</span></div>\n                    </div>\n                </div>\n            </div>\n        `).join(""))}
+
+      // Simplified staff rendering function
+      function renderStaff(){const t=document.getElementById("staffGrid"),e=document.getElementById("noResults");let n=staffData.filter(t=>("all"===currentFilter||t.type===currentFilter)&&(""===searchTerm||t.name.toLowerCase().includes(searchTerm.toLowerCase())||t.position.toLowerCase().includes(searchTerm.toLowerCase())||t.department.toLowerCase().includes(searchTerm.toLowerCase())));0===n.length?(t.style.display="none",e.style.display="block"):(t.style.display="grid",e.style.display="none",t.innerHTML=n.map((t,e)=>`
+        <div class="staff-card" data-aos="fade-up" data-aos-delay="${(e % 4) * 100}">
+          <img src="${t.image.startsWith('http') ? t.image : `https://picsum.photos/seed/${t.image}/300/300.jpg`}" alt="${t.name}" class="staff-photo">
+          <div class="staff-info">
+            <div class="staff-name">${t.name}</div>
+            <p class="staff-position">${t.position}</p>
+          </div>
+        </div>`).join(""))}
+
       function setupStaffEventListeners(){document.getElementById("searchInput").addEventListener("input",t=>{searchTerm=t.target.value,renderStaff()}),document.querySelectorAll(".filter-btn").forEach(t=>{t.addEventListener("click",e=>{document.querySelectorAll(".filter-btn").forEach(t=>t.classList.remove("active")),e.target.classList.add("active"),currentFilter=e.target.dataset.filter,renderStaff()})})}
       
+      // Event Gallery Accordion Logic
       const acc = document.getElementsByClassName("accordion-header");
       for (let i = 0; i < acc.length; i++) {
         acc[i].addEventListener("click", function() {
@@ -160,6 +290,8 @@
           }
         });
       }
+
+      // Initialize everything
       renderStaff();
       setupStaffEventListeners();
     });
