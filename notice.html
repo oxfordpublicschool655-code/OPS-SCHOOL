@@ -34,6 +34,7 @@
         /* School Image Banner */
         .school-banner {
             width: 100%; height: 220px;
+            /* REPLACE THIS URL WITH YOUR MAIN SCHOOL BANNER IMAGE */
             background: url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200') center/cover;
             position: relative; overflow: hidden;
         }
@@ -45,9 +46,34 @@
             color: white; text-align: center; z-index: 1;
         }
 
-        /* Main Container */
+        /* =================== LEADERSHIP SECTION =================== */
+        .leadership-section {
+            max-width: 1400px; margin: 30px auto 20px auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 30px;
+        }
+        .leader-profile {
+            flex: 1; background: white; padding: 20px; border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .leader-profile h4 { color: #2a5298; margin-bottom: 5px; }
+        .leader-profile p { font-size: 0.9em; color: #555; }
+        .leader-pic {
+            width: 80px; height: 80px; border-radius: 50%; object-fit: cover;
+            border: 3px solid #764ba2;
+        }
+        /* REPLACE THESE URLS with actual photos */
+        #principalPic { background-image: url('https://via.placeholder.com/80/1e3c72/ffffff?text=Principal'); }
+        #directorPic { background-image: url('https://via.placeholder.com/80/2a5298/ffffff?text=Director'); }
+
+
+        /* =================== MAIN NOTICE BOARD =================== */
         .container {
-            display: flex; max-width: 1400px; margin: 25px auto;
+            display: flex; max-width: 1400px; margin: 0 auto 25px auto;
             gap: 20px; padding: 0 20px;
         }
 
@@ -57,6 +83,7 @@
             padding: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             max-height: 600px; overflow-y: auto;
         }
+        /* ... (Rest of notice-list styling remains the same) ... */
         .notice-list h3 {
             color: #2a5298; margin-bottom: 18px;
             border-bottom: 3px solid #2a5298; padding-bottom: 8px;
@@ -76,8 +103,6 @@
             font-size: 0.8em; margin-top: 5px; background: #ffd700; color: #333;
         }
         .notice-item.active .notice-type { background: white; color: #2a5298; }
-        
-        /* Admin Icons (visible only when logged in) */
         .icon-wrap { float: right; }
         .icon { font-size: 1.1em; margin-left: 10px; cursor: pointer; color: #666; }
         .notice-item.active .icon { color: #FFEB3B; }
@@ -103,8 +128,6 @@
         .notice-list::-webkit-scrollbar-thumb { background: #2a5298; border-radius: 10px; }
         
         /* =================== ADMIN MODAL & PANEL =================== */
-
-        /* Login Modal */
         #loginModal { position: fixed; inset: 0; background: rgba(0,0,0,.55); 
             display: none; align-items: center; justify-content: center; z-index: 100; }
         .modal-box { background: #fff; border-radius: 8px; padding: 30px 40px; 
@@ -115,7 +138,6 @@
         .modal-box button { margin-top: 15px; width: 100%; padding: 10px; 
             background: #2a5298; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; }
 
-        /* Admin Panel (Slide-out) */
         #adminPanel { position: fixed; right: 0; top: 0; height: 100%; width: 420px; 
             background: #fafafa; border-left: 3px solid #2a5298; 
             box-shadow: -4px 0 12px rgba(0,0,0,.15);
@@ -135,6 +157,9 @@
         .delete-btn { background: #d32f2f; }
 
         /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .leadership-section { flex-direction: column; gap: 15px; }
+        }
         @media (max-width: 768px) {
             .container { flex-direction: column; }
             .notice-list { width: 100%; max-height: 400px; }
@@ -162,7 +187,27 @@
         </div>
     </div>
 
-    <!-- ================= MAIN AREA ================= -->
+    <!-- ================= LEADERSHIP SECTION ================= -->
+    <div class="leadership-section">
+        <div class="leader-profile">
+            <div class="leader-pic" id="principalPic"></div>
+            <div>
+                <h4>Dr. Eleanor Vance</h4>
+                <p>Principal, OPS. Dedicated to fostering academic rigor and holistic student development for over a decade.</p>
+            </div>
+        </div>
+
+        <div class="leader-profile">
+            <div class="leader-pic" id="directorPic"></div>
+            <div>
+                <h4>Mr. Thomas Harding</h4>
+                <p>School Director. Guiding the vision of Oxford Public School towards global educational standards and innovation.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ================= MAIN NOTICE BOARD AREA ================= -->
     <div class="container">
         <!-- LEFT – Notice list -->
         <div class="notice-list" id="noticeList">
@@ -485,3 +530,4 @@
     </script>
 </body>
 </html>
+```
