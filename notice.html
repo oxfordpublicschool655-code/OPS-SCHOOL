@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oxford Public School - Notice and Information</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Header Section */
+        .header {
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .header h2 {
+            font-size: 1.5em;
+            font-weight: 300;
+            color: #e0e0e0;
+        }
+
+        /* School Image Banner */
+        .school-banner {
+            width: 100%;
+            height: 250px;
+            background: url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200') center/cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .school-banner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .school-info {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            text-align: center;
+            z-index: 1;
+        }
+
+        /* Main Container */
+        .container {
+            display: flex;
+            max-width: 1400px;
+            margin: 20px auto;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        /* Left Column - Notice List */
+        .notice-list {
+            width: 35%;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .notice-list h3 {
+            color: #2a5298;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #2a5298;
+        }
+
+        .notice-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+            border-left: 4px solid #2a5298;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+        }
+
+        .notice-item:hover {
+            background: #e3f2fd;
+            transform: translateX(5px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .notice-item.active {
+            background: #2a5298;
+            color: white;
+        }
+
+        .notice-title {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .notice-date {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .notice-item.active .notice-date {
+            color: #e0e0e0;
+        }
+
+        .notice-type {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.8em;
+            margin-top: 5px;
+            background: #ffd700;
+            color: #333;
+        }
+
+        .notice-item.active .notice-type {
+            background: white;
+            color: #2a5298;
+        }
+
+        /* Right Column - Notice Preview */
+        .notice-preview {
+            flex: 1;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            min-height: 600px;
+        }
+
+        .preview-header {
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .preview-title {
+            color: #2a5298;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .preview-meta {
+            display: flex;
+            gap: 20px;
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .preview-content {
+            line-height: 1.8;
+            color: #333;
+            font-size: 1.05em;
+        }
+
+        .preview-content h4 {
+            color: #2a5298;
+            margin: 20px 0 10px;
+        }
+
+        .preview-content ul {
+            margin-left: 30px;
+            margin-top: 10px;
+        }
+
+        .preview-content li {
+            margin-bottom: 8px;
+        }
+
+        .no-selection {
+            text-align: center;
+            color: #999;
+            padding: 50px;
+            font-size: 1.2em;
+        }
+
+        /* Scrollbar Styling */
+        .notice-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .notice-list::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .notice-list::-webkit-scrollbar-thumb {
+            background: #2a5298;
+            border-radius: 10px;
+        }
+
+        .notice-list::-webkit-scrollbar-thumb:hover {
+            background: #1e3c72;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .notice-list {
+                width: 100%;
+                max-height: 400px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .school-banner {
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header">
+        <h1>Oxford Public School</h1>
+        <h2>Notice and Information Board</h2>
+    </div>
+
+    <!-- School Banner Image -->
+    <div class="school-banner">
+        <div class="school-info">
+            <h3>Excellence in Education Since 1985</h3>
+            <p>Shaping Future Leaders</p>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Left Column - Notice List -->
+        <div class="notice-list">
+            <h3>Recent Notices & Events</h3>
+            
+            <div class="notice-item" onclick="showNotice(1)">
+                <div class="notice-title">Annual Sports Day 2024</div>
+                <div class="notice-date">Posted: November 15, 2024</div>
+                <span class="notice-type">Event</span>
+            </div>
+
+            <div class="notice-item" onclick="showNotice(2)">
+                <div class="notice-title">Parent-Teacher Meeting</div>
+                <div class="notice-date">Posted: November 12, 2024</div>
+                <span class="notice-type">Meeting</span>
+            </div>
+
+            <div class="notice-item" onclick="showNotice(3)">
+                <div class="notice-title">Winter Vacation Notice</div>
+                <div class="notice-date">Posted: November 10, 2024</div>
+                <span class="notice-type">Holiday</span>
+            </div>
+
+            <div class="notice-item" onclick="showNotice(4)">
+                <div class="notice-title">Science Exhibition 2024</div>
+                <div class="notice-date">Posted: November 8, 2024</div>
+                <span class="notice-type">Event</span>
+            </div>
+
+            <div class="notice-item" onclick="showNotice(5)">
+                <div class="notice-title">Fee Payment Reminder</div>
+                <div class="notice-date">Posted: November 5, 2024</div>
+                <span class="notice-type">Important</span>
+            </div>
+
+            <div class="notice-item" onclick="showNotice(6)">
+                <div class="notice-title">School Uniform Policy Update</div>
+                <div class="notice-date">Posted: November 3, 2024</div>
+                <span class="notice-type">Policy</span>
+            </div>
+
+            <div class="notice-item" onclick="showNotice(7)">
+                <div class="notice-title">Cultural Fest Registration</div>
+                <div class="notice-date">Posted: November 1, 2024</div>
+                <span class="notice-type">Event</span>
+            </div>
+        </div>
+
+        <!-- Right Column - Notice Preview -->
+        <div class="notice-preview" id="noticePreview">
+            <div class="no-selection">
+                <p>📋 Select a notice from the left panel to view details</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Notice data
+        const notices = {
+            1: {
+                title: "Annual Sports Day 2024",
+                date: "November 15, 2024",
+                type: "Event",
+                content: `
+                    <h4>Event Details:</h4>
+                    <p>We are pleased to announce our Annual Sports Day 2024, scheduled for December 15, 2024.</p>
+                    
+                    <h4>Program Schedule:</h4>
+                    <ul>
+                        <li>Date: December 15, 2024 (Saturday)</li>
+                        <li>Time: 8:00 AM - 5:00 PM</li>
+                        <li>Venue: School Sports Ground</li>
+                        <li>Chief Guest: Mr. Rajesh Kumar, Olympic Athlete</li>
+                    </ul>
+                    
+                    <h4>Events Include:</h4>
+                    <ul>
+                        <li>100m, 200m, and 400m races</li>
+                        <li>Long jump and High jump</li>
+                        <li>Relay races</li>
+                        <li>Shot put and Discus throw</li>
+                        <li>Various team sports</li>
+                    </ul>
+                    
+                    <p><strong>Note:</strong> All students are required to wear their house uniforms. Parents are cordially invited to attend the event.</p>
+                `
+            },
+            2: {
+                title: "Parent-Teacher Meeting",
+                date: "November 12, 2024",
+                type: "Meeting",
+                content: `
+                    <h4>Meeting Information:</h4>
+                    <p>The Parent-Teacher Meeting for the academic session 2024-25 will be held as per the following schedule:</p>
+                    
+                    <h4>Schedule:</h4>
+                    <ul>
+                        <li>Classes I-V: November 25, 2024 (9:00 AM - 12:00 PM)</li>
+                        <li>Classes VI-VIII: November 25, 2024 (2:00 PM - 5:00 PM)</li>
+                        <li>Classes IX-XII: November 26, 2024 (9:00 AM - 1:00 PM)</li>
+                    </ul>
+                    
+                    <h4>Important Points:</h4>
+                    <ul>
+                        <li>Please bring your ward's diary</li>
+                        <li>Report cards will be distributed during the meeting</li>
+                        <li>Individual time slots will be communicated via SMS</li>
+                        <li>Both parents are encouraged to attend</li>
+                    </ul>
+                    
+                    <p><strong>Contact:</strong> For queries, please contact the school office at 0123-456789.</p>
+                `
+            },
+            3: {
+                title: "Winter Vacation Notice",
+                date: "November 10, 2024",
+                type: "Holiday",
+                content: `
+                    <h4>Winter Break Announcement:</h4>
+                    <p>The school will remain closed for Winter Vacation from December 25, 2024, to January 5, 2025.</p>
+                    
+                    <h4>Important Dates:</h4>
+                    <ul>
+                        <li>Last working day: December 24, 2024</li>
+                        <li>School reopens: January 6, 2025</li>
+                        <li>Timing on reopening day: 8:00 AM (Regular)</li>
+                    </ul>
+                    
+                    <h4>Holiday Homework:</h4>
+                    <p>Holiday homework for all classes will be uploaded on the school website by December 20, 2024. Students are advised to complete all assignments during the vacation.</p>
+                    
+                    <h4>Office Hours During Vacation:</h4>
+                    <ul>
+                        <li>December 26-28: 10:00 AM - 1:00 PM</li>
+                        <li>December 31 - January 3: Closed</li>
+                        <li>January 4-5: 10:00 AM - 1:00 PM</li>
+                    </ul>
+                    
+                    <p>We wish all students and parents a wonderful winter break!</p>
+                `
+            },
+            4: {
+                title: "Science Exhibition 2024",
+                date: "November 8, 2024",
+                type: "Event",
+                content: `
+                    <h4>Annual Science Exhibition:</h4>
+                    <p>Oxford Public School is organizing its Annual Science Exhibition showcasing innovative projects by our talented students.</p>
+                    
+                    <h4>Event Details:</h4>
+                    <ul>
+                        <li>Date: November 30, 2024</li>
+                        <li>Time: 9:00 AM - 4:00 PM</li>
+                        <li>Venue: School Auditorium and Science Labs</li>
+                        <li>Entry: Free for all</li>
+                    </ul>
+                    
+                    <h4>Exhibition Categories:</h4>
+                    <ul>
+                        <li>Physics Projects</li>
+                        <li>Chemistry Experiments</li>
+                        <li>Biology Models</li>
+                        <li>Environmental Science</li>
+                        <li>Robotics and AI</li>
+                        <li>Space Science</li>
+                    </ul>
+                    
+                    <h4>Participation:</h4>
+                    <p>Students interested in presenting projects should register with their respective science teachers by November 20, 2024.</p>
+                    
+                    <p><strong>Prizes:</strong> Best projects in each category will receive certificates and prizes.</p>
+                `
+            },
+            5: {
+                title: "Fee Payment Reminder",
+                date: "November 5, 2024",
+                type: "Important",
+                content: `
+                    <h4>School Fee Payment Notice:</h4>
+                    <p>This is a reminder for the payment of school fees for the Third Quarter (October - December 2024).</p>
+                    
+                    <h4>Payment Details:</h4>
+                    <ul>
+                        <li>Due Date: November 30, 2024</li>
+                        <li>Late Fee: ₹100 per day after due date</li>
+                        <li>Payment Mode: Online/Cash/Cheque</li>
+                    </ul>
+                    
+                    <h4>Online Payment Options:</h4>
+                    <ul>
+                        <li>School Website Payment Portal</li>
+                        <li>Bank Transfer (Details available at office)</li>
+                        <li>UPI Payment</li>
+                        <li>Credit/Debit Card</li>
+                    </ul>
+                    
+                    <h4>Office Hours for Cash Payment:</h4>
+                    <ul>
+                        <li>Monday to Friday: 8:30 AM - 3:30 PM</li>
+                        <li>Saturday: 8:30 AM - 12:30 PM</li>
+                    </ul>
+                    
+                    <p><strong>Note:</strong> Please retain the fee receipt for future reference. For any queries, contact the accounts department.</p>
+                `
+            },
+            6: {
+                title: "School Uniform Policy Update",
+                date: "November 3, 2024",
+                type: "Policy",
+                content: `
+                    <h4>Updated Uniform Guidelines:</h4>
+                    <p>Please note the following updates to the school uniform policy effective from December 1, 2024.</p>
+                    
+                    <h4>Summer Uniform (April - September):</h4>
+                    <ul>
+                        <li>White shirt with school logo</li>
+                        <li>Navy blue trousers/skirt</li>
+                        <li>Black shoes with white socks</li>
+                        <li>School tie (Wednesday and Saturday)</li>
+                    </ul>
+                    
+                    <h4>Winter Uniform (October - March):</h4>
+                    <ul>
+                        <li>White shirt with school logo</li>
+                        <li>Navy blue trousers/skirt</li>
+                        <li>Navy blue sweater/blazer with school logo</li>
+                        <li>Black shoes with white socks</li>
+                        <li>School tie (mandatory daily)</li>
+                    </ul>
+                    
+                    <h4>Sports Uniform:</h4>
+                    <ul>
+                        <li>House color t-shirt</li>
+                        <li>White sports shoes</li>
+                        <li>Navy blue track pants</li>
+                    </ul>
+                    
+                    <p><strong>Important:</strong> Students not in proper uniform will not be allowed to enter the classroom.</p>
+                `
+            },
+            7: {
+                title: "Cultural Fest Registration",
+                date: "November 1, 2024",
+                type: "Event",
+                content: `
+                    <h4>Annual Cultural Fest - "Expressions 2024"</h4>
+                    <p>Get ready for the most awaited cultural extravaganza of the year! Showcase your talents in various cultural activities.</p>
+                    
+                    <h4>Event Schedule:</h4>
+                    <ul>
+                        <li>Dates: December 20-22, 2024</li>
+                        <li>Venue: School Auditorium</li>
+                        <li>Registration Deadline: November 15, 2024</li>
+                    </ul>
+                    
+                    <h4>Competition Categories:</h4>
+                    <ul>
+                        <li>Solo Dance</li>
+                        <li>Group Dance</li>
+                        <li>Solo Singing</li>
+                        <li>Group Singing</li>
+                        <li>Drama/Skit</li>
+                        <li>Stand-up Comedy</li>
+                        <li>Fashion Show</li>
+                        <li>Band Performance</li>
+                    </ul>
+                    
+                    <h4>Registration Process:</h4>
+                    <ul>
+                        <li>Fill the registration form available at the reception</li>
+                        <li>Registration fee: ₹50 per event</li>
+                        <li>Submit with class teacher's approval</li>
+                    </ul>
+                    
+                    <p><strong>Prizes:</strong> Exciting prizes and certificates for winners and participants!</p>
+                `
+            }
+        };
+
+        function showNotice(noticeId) {
+            // Remove active class from all items
+            document.querySelectorAll('.notice-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Add active class to clicked item
+            event.currentTarget.classList.add('active');
+            
+            // Get notice data
+            const notice = notices[noticeId];
+            
+            // Update preview content
+            const previewDiv = document.getElementById('noticePreview');
+            previewDiv.innerHTML = `
+                <div class="preview-header">
+                    <h2 class="preview-title">${notice.title}</h2>
+                    <div class="preview-meta">
+                        <span>📅 ${notice.date}</span>
+                        <span>📌 ${notice.type}</span>
+                    </div>
+                </div>
+                <div class="preview-content">
+                    ${notice.content}
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
