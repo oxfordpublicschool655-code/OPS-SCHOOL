@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Photo Upload</title>
+</head>
+<body>
+  <h2>Upload Your Photo</h2>
+  <input type="file" id="fileInput"><br><br>
+  <button onclick="uploadFile()">Upload</button>
+  <p id="result"></p>
+
+  <script>
+    async function uploadFile() {
+      const fileInput = document.getElementById('fileInput');
+      const file = fileInput.files[0];
+      if (!file) return alert("Please select a file.");
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const response = await fetch('YOUR_SCRIPT_URL_HERE', { // replace with your Apps Script URL
+        method: 'POST',
+        body: formData
+      });
+
+      const result = await response.text();
+      document.getElementById('result').innerHTML = 
+        result.includes('http') ? 
+        `Uploaded successfully: <a href="${result}" target="_blank">View File</a>` : 
+        `Error: ${result}`;
+    }
+  </script>
+</body>
+</html>
