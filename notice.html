@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,22 +54,24 @@
             display: flex;
             gap: 30px;
         }
-        .leader-profile {
+        .leader-profile-card {
             flex: 1; background: white; padding: 20px; border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             display: flex;
             align-items: center;
             gap: 20px;
+            text-decoration: none; /* Remove underline for link */
+            color: inherit;
         }
-        .leader-profile h4 { color: #2a5298; margin-bottom: 5px; }
-        .leader-profile p { font-size: 0.9em; color: #555; }
+        .leader-profile-card:hover {
+             box-shadow: 0 8px 20px rgba(0,0,0,0.15); /* Slight lift on hover */
+        }
+        .leader-profile-card h4 { color: #2a5298; margin-bottom: 5px; }
+        .leader-profile-card p { font-size: 0.9em; color: #555; }
         .leader-pic {
             width: 80px; height: 80px; border-radius: 50%; object-fit: cover;
             border: 3px solid #764ba2;
         }
-        /* REPLACE THESE URLS with actual photos */
-        #principalPic { background-image: url('https://via.placeholder.com/80/1e3c72/ffffff?text=Principal'); }
-        #directorPic { background-image: url('https://via.placeholder.com/80/2a5298/ffffff?text=Director'); }
 
 
         /* =================== MAIN NOTICE BOARD =================== */
@@ -130,6 +133,7 @@
         /* =================== ADMIN MODAL & PANEL =================== */
         #loginModal { position: fixed; inset: 0; background: rgba(0,0,0,.55); 
             display: none; align-items: center; justify-content: center; z-index: 100; }
+        /* ... (Admin Modal styles remain the same) ... */
         .modal-box { background: #fff; border-radius: 8px; padding: 30px 40px; 
             min-width: 320px; text-align: center; }
         .modal-box h3 { margin-bottom: 20px; color: #2a5298; }
@@ -182,28 +186,32 @@
     <!-- ================= BANNER ================= -->
     <div class="school-banner">
         <div class="school-info">
-            <h3>Excellence in Education Since 1985</h3>
+            <h3>Excellence in Education Since 1987</h3>
             <p>Shaping Future Leaders</p>
         </div>
     </div>
 
-    <!-- ================= LEADERSHIP SECTION ================= -->
+    <!-- ================= LEADERSHIP SECTION (NEW) ================= -->
     <div class="leadership-section">
-        <div class="leader-profile">
-            <div class="leader-pic" id="principalPic"></div>
+        <!-- PRINCIPAL LINK -->
+        <a href="principal_profile.html" class="leader-profile-card">
+            <!-- IMPORTANT: REPLACE THE SRC with your actual principal image path -->
+            <img class="leader-pic" id="principalPic" src="https://via.placeholder.com/80/1e3c72/ffffff?text=P" alt="Principal Photo">
             <div>
-                <h4>Mr. Raj Narayan</h4>
-                <p>School Director. Guiding the vision of Oxford Public School towards global educational standards and innovation.</p>
-            </div>
-        </div>
-
-        <div class="leader-profile">
-            <div class="leader-pic" id="directorPic"></div>
-            <div>
-                <h4>Mr. Nitish Kumar Nayan</h4>
+                <h4>Dr. Eleanor Vance</h4>
                 <p>Principal, OPS. Dedicated to fostering academic rigor and holistic student development for over a decade.</p>
             </div>
-        </div>
+        </a>
+
+        <!-- DIRECTOR LINK -->
+        <a href="director_profile.html" class="leader-profile-card">
+            <!-- IMPORTANT: REPLACE THE SRC with your actual director image path -->
+            <img class="leader-pic" id="directorPic" src="https://via.placeholder.com/80/2a5298/ffffff?text=D" alt="Director Photo">
+            <div>
+                <h4>Mr. Thomas Harding</h4>
+                <p>School Director. Guiding the vision of Oxford Public School towards global educational standards and innovation.</p>
+            </div>
+        </a>
     </div>
 
 
@@ -272,7 +280,7 @@
       </form>
     </div>
 
-    <!-- ================= SCRIPT SECTION ================= -->
+    <!-- ================= SCRIPT SECTION (Admin Logic remains the same) ================= -->
     <script>
         const $$ = q => document.querySelector(q);
         const $_all = q => document.querySelectorAll(q);
@@ -530,5 +538,3 @@
     </script>
 </body>
 </html>
-```
-
