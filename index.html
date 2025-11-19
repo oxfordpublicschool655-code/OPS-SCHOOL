@@ -218,17 +218,64 @@
     </div>
   </section>
 
-  <footer class="site-footer">
-    <p>&copy; 2025 Oxford Public School, Shivajinagar. All rights reserved.</p>
-  </footer>
+<!-- FOOTER SECTION -->
+<style>
+  .site-footer {
+    background-color: #333; /* Dark Grey Background */
+    color: #ffffff;         /* White Text */
+    padding: 15px 0;        /* Spacing top and bottom */
+    width: 100%;
+    text-align: center;     /* Ensures text is in the center */
+    margin-top: auto;       /* Pushes footer to the bottom if using flexbox */
+  }
 
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      AOS.init({ duration: 800, once: true });
-      const nav = document.querySelector('nav');
-      window.addEventListener('scroll', () => { window.scrollY > 50 ? nav.classList.add('scrolled') : nav.classList.remove('scrolled'); });
-      // PASTE THIS CORRECTED ARRAY INTO YOUR CODE
+  .site-footer p {
+    margin: 0;              /* Removes extra space around text */
+    display: inline-block;  /* Keeps it in a straight line */
+    font-size: 14px;
+  }
+</style>
+
+<footer class="site-footer">
+    <p>&copy; 2025 Oxford Public School, Shivajinagar. All rights reserved.</p>
+</footer>
+
+<!-- SCRIPTS SECTION -->
+<!-- This includes the Animation (AOS), Navbar scroll, and the "Up/Down" Accordion logic -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    
+    // 1. Start Animations
+    AOS.init({ duration: 800, once: true });
+
+    // 2. Navbar Scroll Effect
+    const nav = document.querySelector('nav');
+    if(nav) {
+        window.addEventListener('scroll', () => { 
+            window.scrollY > 50 ? nav.classList.add('scrolled') : nav.classList.remove('scrolled'); 
+        });
+    }
+
+    // 3. Accordion Function (The Up/Down Dropdown logic)
+    var acc = document.getElementsByClassName("accordion-header");
+    for (var i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function() {
+        // Toggle the active class (for changing the arrow icon if you have one)
+        this.classList.toggle("active");
+        
+        // Open or Close the panel
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+          panel.style.display = "none";
+        } else {
+          panel.style.display = "block";
+        }
+      });
+    }
+
+  });
+</script>
 
 const staffData = [
     // --- CORRECTED ENTRIES ---
@@ -308,6 +355,7 @@ const staffData = [
 </body>
 
 </html>
+
 
 
 
