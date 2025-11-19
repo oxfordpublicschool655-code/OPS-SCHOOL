@@ -147,25 +147,48 @@
         </div>
       </div>
     </section>
-    <section class="column" id="events" data-aos="fade-up">
-      <h3>Event Highlights</h3>
-      <div class="scrollable-content">
-        <button class="accordion-header">Annual Sports Day</button>
-        <a>
-          <div>
-            <div class = " click for Gallery Pic">
-              <ul>
-                  <li><a href="gallery.html" target="_blank">Gallery Area </a></li>
-              </ul>
-        </a>
-        <div class="accordion-panel"> <div class="event-photo-grid"> <img src="https://picsum.photos/seed/sports1/200" alt="Event Photo"> <img src="https://picsum.photos/seed/sports2/200" alt="Event Photo"> <img src="https://picsum.photos/seed/sports3/200" alt="Event Photo"> <img src="https://picsum.photos/seed/sports4/200" alt="Event Photo"> <img src="https://picsum.photos/seed/sports5/200" alt="Event Photo"> <img src="https://picsum.photos/seed/sports6/200" alt="Event Photo"> </div> </div>
-        <button class="accordion-header">Science Fair Exhibition</button>
-        <div class="accordion-panel"> <div class="event-photo-grid"> <img src="https://picsum.photos/seed/science1/200" alt="Event Photo"> <img src="https://picsum.photos/seed/science2/200" alt="Event Photo"> <img src="https://picsum.photos/seed/science3/200" alt="Event Photo"> </div> </div>
-        <button class="accordion-header">Annual Music Concert</button>
-        <div class="accordion-panel"> <div class="event-photo-grid"> <img src="https://picsum.photos/seed/music1/200" alt="Event Photo"> <img src="https://picsum.photos/seed/music2/200" alt="Event Photo"> <img src="https://picsum.photos/seed/music3/200" alt="Event Photo"> <img src="https://picsum.photos/seed/music4/200" alt="Event Photo"> </div> </div>
-      </div>
-    </section>
-  </main>
+  <section class="column" id="events" data-aos="fade-up">
+    <h3>Event Highlights</h3>
+
+    <!-- 1. SCHOOL PICTURE SECTION (Appears above the button) -->
+    <div class="school-image-container" style="margin-bottom: 10px;">
+        <!-- REPLACE the link below with your actual School Image URL -->
+        <img src="https://picsum.photos/id/1/600/300" alt="My School" style="width: 100%; height: auto; border-radius: 8px;">
+    </div>
+
+    <div class="scrollable-content">
+
+        <!-- 2. THE SINGLE ACCORDION BUTTON -->
+        <button class="accordion-header" style="background-color: #000; color: #fff; width: 100%; padding: 15px; text-align: left; cursor: pointer; border: none; outline: none;">
+            My School Events Pics ▼
+        </button>
+
+        <!-- 3. THE DROPDOWN PANEL WITH DRIVE LINKS -->
+        <div class="accordion-panel">
+            <div style="padding: 15px; background-color: #f1f1f1;">
+                
+                <p style="margin-top: 0;">Click an event below to open the Drive folder:</p>
+
+                <!-- LINK 1: Annual Sports Day -->
+                <a href="PASTE_YOUR_SPORTS_DRIVE_LINK_HERE" target="_blank" style="display: block; padding: 10px; margin-bottom: 5px; background: white; border: 1px solid #ccc; text-decoration: none; color: #333; border-radius: 4px;">
+                    📂 Annual Sports Day
+                </a>
+
+                <!-- LINK 2: Science Fair -->
+                <a href="PASTE_YOUR_SCIENCE_DRIVE_LINK_HERE" target="_blank" style="display: block; padding: 10px; margin-bottom: 5px; background: white; border: 1px solid #ccc; text-decoration: none; color: #333; border-radius: 4px;">
+                    📂 Science Fair Exhibition
+                </a>
+
+                <!-- LINK 3: Music Concert -->
+                <a href="PASTE_YOUR_MUSIC_DRIVE_LINK_HERE" target="_blank" style="display: block; padding: 10px; margin-bottom: 5px; background: white; border: 1px solid #ccc; text-decoration: none; color: #333; border-radius: 4px;">
+                    📂 Annual Music Concert
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+</section>
 
   <section class="notification-section" id="contact" data-aos="fade-up">
     <h3 class="section-title">Information & Quick Links</h3>
@@ -285,6 +308,7 @@ const staffData = [
 </body>
 
 </html>
+
 
 
 
