@@ -236,125 +236,162 @@
   }
 </style>
 
+<!-- FOOTER SECTION -->
 <footer class="site-footer">
     <p>&copy; 2025 Oxford Public School, Shivajinagar. All rights reserved.</p>
 </footer>
 
 <!-- SCRIPTS SECTION -->
-<!-- This includes the Animation (AOS), Navbar scroll, and the "Up/Down" Accordion logic -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    
-    // 1. Start Animations
+document.addEventListener("DOMContentLoaded", function() {
+
+    // 1. Initialize Animations
     AOS.init({ duration: 800, once: true });
 
     // 2. Navbar Scroll Effect
     const nav = document.querySelector('nav');
-    if(nav) {
-        window.addEventListener('scroll', () => { 
-            window.scrollY > 50 ? nav.classList.add('scrolled') : nav.classList.remove('scrolled'); 
+    if (nav) {
+        window.addEventListener('scroll', () => {
+            window.scrollY > 50 ? nav.classList.add('scrolled') : nav.classList.remove('scrolled');
         });
     }
 
     // 3. Accordion Function (The Up/Down Dropdown logic)
-    var acc = document.getElementsByClassName("accordion-header");
-    for (var i = 0; i < acc.length; i++) {
-      acc[i].addEventListener("click", function() {
-        // Toggle the active class (for changing the arrow icon if you have one)
-        this.classList.toggle("active");
-        
-        // Open or Close the panel
-        var panel = this.nextElementSibling;
-        if (panel.style.display === "block") {
-          panel.style.display = "none";
-        } else {
-          panel.style.display = "block";
-        }
-      });
+    // This version uses maxHeight for smooth sliding animation
+    const acc = document.getElementsByClassName("accordion-header");
+    for (let i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            const panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        });
     }
 
-  });
+    // 4. STAFF DATA & RENDERING LOGIC
+    const staffData = [
+        { name: "RAHUL KUMAR", position: "STAFF", department: "OFFICE", type: "non-teaching", image: "rahul-kumar" },
+        { name: "SANTOSH KUMAR", position: "STAFF", department: "OFFICE", type: "non-teaching", image: "santosh-kumar" },
+        { name: "ARATI KUMARI", position: "STAFF", department: "OFFICE", type: "non-teaching", image: "arati-kumari" },
+        { name: "MADHUKAR KUMAR", position: "STAFF", department: "OFFICE", type: "non-teaching", image: "madhukar-kumar" },
+        { name: "DEEPAK KUMAR", position: "TEACHER", department: "3 TO 8 STANDARD TEACHER", type: "teacher", image: "deepak-kumar" },
+        { name: "SONI KUMARI", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", image: "soni-kumari" },
+        { name: "RANJEET KUMAR SINGH", position: "TEACHER", department: "3 TO 8 STANDARD TEACHER", type: "teacher", image: "ranjeet-kumar-singh" },
+        { name: "MAHADEV PANDIT", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", image: "mahadev-pandit" },
+        { name: "NILU KUMARI", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", image: "nilu-kumari" },
+        { name: "CHANDANI KUMARI", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", image: "chandani-kumari" },
+        { name: "PAMMY KUMARI", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", image: "pammy-kumari" },
+        { name: "HEMKANT KUMAR SINGH", position: "TEACHER", department: "3 TO 8 STANDARD TEACHER", type: "teacher", image: "hemkant-kumar-singh" },
+        { name: "JAY SHANKAR KUMAR", position: "TEACHER", department: "3 TO 8 STANDARD TEACHER", type: "teacher", image: "jay-shankar-kumar" },
+        { name: "DINESH PRASHAD SINGH", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", image: "dinesh-prashad-singh" },
+        { name: "SHIWANI KUMARI", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", image: "shiwani-kumari" },
+        { name: "TANU KUAMRI", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", image: "tanu-kuamri" },
+        { name: "SANGITA KUMARI", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", image: "sangita-kumari" },
+        { name: "DAYASHANKAR KUMAR", position: "TEACHER", department: "3 TO 8 STANDARD TEACHER", type: "teacher", image: "dayashankar-kumar" },
+        { name: "RAVEENA KUMARI", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", image: "raveena-kumari" },
+        { name: "LAXMAN KUMAR", position: "TEACHER", department: "3 TO 8 STANDARD TEACHER", type: "teacher", image: "laxman-kumar" },
+        { name: "BABY KUMARI", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", image: "baby-kumari" },
+        { name: "GYAN BHARTI", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", image: "gyan-bharti" },
+        { name: "KOMAL KUMARI", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", image: "komal-kumari" },
+        { name: "KARISHMA KUMARI", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", image: "karishma-kumari" },
+        { name: "RAJNISH KUMAR", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", image: "rajnish-kumar" },
+        { name: "NITISH KUMAR 2ND", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", image: "nitish-kumar-2nd" },
+        { name: "MAMAN CHOUDHARY", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", image: "maman-choudhary" },
+        { name: "KAJAL MAM", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", image: "kajal-mam" },
+        { name: "SANGAM MAM", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", image: "sangam-mam" },
+        { name: "NITISH SIRE 3RD", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", image: "nitish-sire-3rd" },
+        { name: "POOJA MAM", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", image: "pooja-mam" },
+        { name: "REENA MAM", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", image: "reena-mam" },
+        { name: "NITU MAM", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", image: "nitu-mam" },
+        { name: "SANJU MAM", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", image: "sanju-mam" },
+        { name: "MUKESH SIR", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", image: "mukesh-sir" },
+        { name: "JYOTI MAM", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", image: "jyoti-mam" },
+        { name: "KANHAIYA SIR", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", image: "kanhaiya-sir" },
+        { name: "SANJULA KUMARI", position: "SWEEPER", department: "Janitorial", type: "non-teaching", image: "sanjula-kumari" },
+        { name: "HEENA JEE", position: "SWEEPER", department: "Janitorial", type: "non-teaching", image: "heena-jee" },
+        { name: "MALA JEE", position: "SWEEPER", department: "Janitorial", type: "non-teaching", image: "mala-jee" },
+        { name: "GANESH JEE (BUS) (BR33PA8676)", position: "DRIVER", department: "Transportation Department", type: "non-teaching", image: "ganesh-jee-bus" },
+        { name: "MUKESH KUMAR(GOLU JEE) (BOLERO) (BR09M3168)", position: "DRIVER", department: "Transportation Department", type: "non-teaching", image: "mukesh-kumar-golu-jee" },
+        { name: "CHANDRAJEET SINGH (MAGIC) (BR07PB5604)", position: "DRIVER", department: "Transportation Department", type: "non-teaching", image: "chandrajeet-singh-magic" },
+        { name: "AMRESH KUMAR (SAVARI)", position: "DRIVER", department: "Transportation Department", type: "non-teaching", image: "amresh-kumar-savari" },
+        { name: "SAROJ KUMAR (SAVARI) (BR07P3034)", position: "DRIVER", department: "Transportation Department", type: "non-teaching", image: "saroj-kumar-savari" },
+        { name: "KAILASH KUMAR (BOLERO) (BR9E5888)", position: "DRIVER", department: "Transportation Department", type: "non-teaching", image: "kailash-kumar-bolero" },
+        { name: "RAM NARESH MANDAL BHAGAT JI", position: "DRIVER", department: "Transportation Department", type: "non-teaching", image: "ram-naresh-mandal" },
+        { name: "SANJAY RAM (MAGIC) (BR07PB1559)", position: "DRIVER", department: "Transportation Department", type: "non-teaching", image: "sanjay-ram-magic" },
+        { name: "RAM SHUKIT MANDAL (CONDUCTOR)", position: "DRIVER", department: "Transportation Department", type: "non-teaching", image: "ram-shukit-mandal" },
+        { name: "LALA JEE", position: "DRIVER", department: "Transportation Department", type: "non-teaching", image: "lala-jee" },
+        { name: "NITENDRA JEE (ELECTRIC MISTRI)", position: "ELECTRICIAN", department: "Transportation Department", type: "non-teaching", image: "nitendra-jee" }
+    ];
 
+    let currentFilter = 'all';
+    let searchTerm = '';
 
-const staffData = [
-    // --- CORRECTED ENTRIES ---
-    { name: "RAHUL KUMAR", position: "STAFF", department: "OFFICE", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "rahul-kumar" },
-    { name: "SANTOSH KUMAR", position: "STAFF", department: "OFFICE", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "santosh-kumar" },
-    { name: "ARATI KUMARI", position: "STAFF", department: "OFFICE", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "arati-kumari" },
-    { name: "MADHUKAR KUMAR", position: "STAFF", department: "OFFICE", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "madhukar-kumar" },
-    
-    // --- The rest of the data was already correct ---
-    { name: "DEEPAK KUMAR", position: "TEACHER", department: "3 TO 8 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "deepak-kumar" },
-    { name: "SONI KUMARI", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "soni-kumari" },
-    { name: "RANJEET KUMAR SINGH", position: "TEACHER", department: "3 TO 8 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "ranjeet-kumar-singh" },
-    { name: "MAHADEV PANDIT", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "mahadev-pandit" },
-    { name: "NILU KUMARI", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "nilu-kumari" },
-    { name: "CHANDANI KUMARI", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "chandani-kumari" },
-    { name: "PAMMY KUMARI", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "pammy-kumari" },
-    { name: "HEMKANT KUMAR SINGH", position: "TEACHER", department: "3 TO 8 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "hemkant-kumar-singh" },
-    { name: "JAY SHANKAR KUMAR", position: "TEACHER", department: "3 TO 8 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "jay-shankar-kumar" },
-    { name: "DINESH PRASHAD SINGH", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "dinesh-prashad-singh" },
-    { name: "SHIWANI KUMARI", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "shiwani-kumari" },
-    { name: "TANU KUAMRI", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "tanu-kuamri" },
-    { name: "SANGITA KUMARI", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "sangita-kumari" },
-    { name: "DAYASHANKAR KUMAR", position: "TEACHER", department: "3 TO 8 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "dayashankar-kumar" },
-    { name: "RAVEENA KUMARI", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "raveena-kumari" },
-    { name: "LAXMAN KUMAR", position: "TEACHER", department: "3 TO 8 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "laxman-kumar" },
-    { name: "BABY KUMARI", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "baby-kumari" },
-    { name: "GYAN BHARTI", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "gyan-bharti" },
-    { name: "KOMAL KUMARI", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "komal-kumari" },
-    { name: "KARISHMA KUMARI", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "karishma-kumari" },
-    { name: "RAJNISH KUMAR", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "rajnish-kumar" },
-    { name: "NITISH KUMAR 2ND", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "nitish-kumar-2nd" },
-    { name: "MAMAN CHOUDHARY", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "maman-choudhary" },
-    { name: "KAJAL MAM", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "kajal-mam" },
-    { name: "SANGAM MAM", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "sangam-mam" },
-    { name: "NITISH SIRE 3RD", position: "TEACHER", department: "1 TO 5 STANDARD TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "nitish-sire-3rd" },
-    { name: "POOJA MAM", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "pooja-mam" },
-    { name: "REENA MAM", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "reena-mam" },
-    { name: "NITU MAM", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "nitu-mam" },
-    { name: "SANJU MAM", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "sanju-mam" },
-    { name: "MUKESH SIR", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "mukesh-sir" },
-    { name: "JYOTI MAM", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "jyoti-mam" },
-    { name: "KANHAIYA SIR", position: "TEACHER", department: "PRIMARY TEACHER", type: "teacher", email: "", phone: "+91-62xxxxxxxx", image: "kanhaiya-sir" },
-    { name: "SANJULA KUMARI", position: "SWEEPER", department: "Janitorial", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "sanjula-kumari" },
-    { name: "HEENA JEE", position: "SWEEPER", department: "Janitorial", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "heena-jee" },
-    { name: "MALA JEE", position: "SWEEPER", department: "Janitorial", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "mala-jee" },
-    { name: "GANESH JEE (BUS) (BR33PA8676)", position: "DRIVER", department: "Transportation Department", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "ganesh-jee-bus" },
-    { name: "MUKESH KUMAR(GOLU JEE) (BOLERO) (BR09M3168)", position: "DRIVER", department: "Transportation Department", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "mukesh-kumar-golu-jee" },
-    { name: "CHANDRAJEET SINGH (MAGIC) (BR07PB5604)", position: "DRIVER", department: "Transportation Department", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "chandrajeet-singh-magic" },
-    { name: "AMRESH KUMAR (SAVARI)", position: "DRIVER", department: "Transportation Department", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "amresh-kumar-savari" },
-    { name: "SAROJ KUMAR (SAVARI) (BR07P3034)", position: "DRIVER", department: "Transportation Department", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "saroj-kumar-savari" },
-    { name: "KAILASH KUMAR (BOLERO) (BR9E5888)", position: "DRIVER", department: "Transportation Department", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "kailash-kumar-bolero" },
-    { name: "RAM NARESH MANDAL BHAGAT JI (BOLERO) (BR06PB4465)", position: "DRIVER", department: "Transportation Department", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "ram-naresh-mandal" },
-    { name: "SANJAY RAM (MAGIC) (BR07PB1559)", position: "DRIVER", department: "Transportation Department", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "sanjay-ram-magic" },
-    { name: "RAM SHUKIT MANDAL (CONDUCTOR)", position: "DRIVER", department: "Transportation Department", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "ram-shukit-mandal" },
-    { name: "LALA JEE", position: "DRIVER", department: "Transportation Department", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "lala-jee" },
-    { name: "NITENDRA JEE (ELECTRIC MISTRI)", position: "ELECTRICIAN", department: "Transportation Department", type: "non-teaching", email: "", phone: "+91-62xxxxxxxx", image: "nitendra-jee" }
-];
-      let currentFilter='all',searchTerm='';
-      function renderStaff(){const t=document.getElementById("staffGrid"),e=document.getElementById("noResults");let n=staffData.filter(t=>("all"===currentFilter||t.type===currentFilter)&&(""===searchTerm||t.name.toLowerCase().includes(searchTerm.toLowerCase())));0===n.length?(t.style.display="none",e.style.display="block"):(t.style.display="grid",e.style.display="none",t.innerHTML=n.map((t,e)=>`\n        <div class="staff-card" data-aos="fade-up" data-aos-delay="${e%4*100}">\n          <img src="${t.image.startsWith("http")?t.image:`https://picsum.photos/seed/${t.image}/300/300.jpg`}" alt="${t.name}" class="staff-photo">\n          <div class="staff-info">\n            <div class="staff-name">${t.name}</div>\n            <p class="staff-position">${t.position}</p>\n          </div>\n        </div>`).join(""))}
-      function setupStaffEventListeners(){document.getElementById("searchInput").addEventListener("input",t=>{searchTerm=t.target.value,renderStaff()}),document.querySelectorAll(".filter-btn").forEach(t=>{t.addEventListener("click",e=>{document.querySelectorAll(".filter-btn").forEach(t=>t.classList.remove("active")),e.target.classList.add("active"),currentFilter=e.target.dataset.filter,renderStaff()})})}
-      const acc = document.getElementsByClassName("accordion-header");
-      for (let i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function() {
-          this.classList.toggle("active");
-          const panel = this.nextElementSibling;
-          if (panel.style.maxHeight) {
-            panel.style.maxHeight = null;
-          } else {
-            panel.style.maxHeight = panel.scrollHeight + "px";
-          }
+    function renderStaff() {
+        const grid = document.getElementById("staffGrid");
+        const noResults = document.getElementById("noResults");
+
+        if (!grid) return; // Guard clause if element doesn't exist
+
+        let filtered = staffData.filter(person => {
+            const matchesType = (currentFilter === "all" || person.type === currentFilter);
+            const matchesSearch = (searchTerm === "" || person.name.toLowerCase().includes(searchTerm.toLowerCase()));
+            return matchesType && matchesSearch;
         });
-      }
-      renderStaff();
-      setupStaffEventListeners();
-    });
-  </script>
-</body>
 
+        if (filtered.length === 0) {
+            grid.style.display = "none";
+            if (noResults) noResults.style.display = "block";
+        } else {
+            grid.style.display = "grid";
+            if (noResults) noResults.style.display = "none";
+            
+            grid.innerHTML = filtered.map((person, index) => `
+                <div class="staff-card" data-aos="fade-up" data-aos-delay="${(index % 4) * 100}">
+                    <img src="${person.image.startsWith("http") ? person.image : `https://picsum.photos/seed/${person.image}/300/300.jpg`}" 
+                         alt="${person.name}" 
+                         class="staff-photo">
+                    <div class="staff-info">
+                        <div class="staff-name">${person.name}</div>
+                        <p class="staff-position">${person.position}</p>
+                        <small style="color:#666; font-size:0.8rem;">${person.department}</small>
+                    </div>
+                </div>
+            `).join("");
+        }
+    }
+
+    function setupStaffEventListeners() {
+        const searchInput = document.getElementById("searchInput");
+        if (searchInput) {
+            searchInput.addEventListener("input", (e) => {
+                searchTerm = e.target.value;
+                renderStaff();
+            });
+        }
+
+        document.querySelectorAll(".filter-btn").forEach(btn => {
+            btn.addEventListener("click", (e) => {
+                document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+                e.target.classList.add("active");
+                currentFilter = e.target.dataset.filter;
+                renderStaff();
+            });
+        });
+    }
+
+    // Initialize Staff Directory
+    renderStaff();
+    setupStaffEventListeners();
+
+});
+</script>
+</body>
 </html>
+
 
 
 
